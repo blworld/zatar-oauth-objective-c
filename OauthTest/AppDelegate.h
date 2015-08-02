@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "globalSettings.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+extern NSString *authorizationToken;
+
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate>{
+    
+
+}
 
 @property (strong, nonatomic) UIWindow *window;
 

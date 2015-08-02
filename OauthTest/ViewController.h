@@ -8,7 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+NSString *authorizationToken;
+
+@interface ViewController : UIViewController{
+    
+    UIButton *authorizeButton;
+    UITextView *eventLogTextView;
+    
+    NSMutableData *authBuffer;
+    
+    NSURLConnection *requestAuthTokenConnection;
+    
+}
+
+@property(nonatomic, retain) IBOutlet UIButton *authorizeButton;
+@property(nonatomic, retain) IBOutlet UITextView *eventLogTextView;
+
+-(IBAction)tappedOnAuthorizeButton:(id)sender;
 
 
 @end

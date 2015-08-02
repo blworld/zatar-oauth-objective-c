@@ -42,4 +42,74 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    
+    NSLog(@"\n\n...OauthTest AppDelegate...inside applicationOpenUrlSourceApplicationAnnotation!!\n\n");
+    
+    NSLog(@"Calling Application Bundle ID: %@", sourceApplication);
+    NSLog(@"URL scheme:%@", [url scheme]);
+    NSLog(@"URL query: %@", [url query]);
+    
+    NSMutableString *tempString = [[NSMutableString alloc]initWithCapacity:128];
+    
+    NSRange subRange;
+
+    if ([[url scheme] isEqualToString:@"oauthtestapp"]) {
+        // valid callback has occurred - now get authorization token
+        
+        NSLog(@"\n\n...VALID URL scheme detected - loading Authorization token into global variable\n\n");
+        
+        [tempString setString:[url query]];
+        
+        NSLog(@"\n\n...tempString = %@\n\n", tempString);
+        
+        subRange = [tempString rangeOfString:@"code="];
+        
+        NSLog(@"\n\n...after searching for 'code='...subrange.location = %lu, subrange.length = %lu\n\n", (unsigned long)subRange.location, (unsigned long)subRange.length);
+        
+        // first remove 'code=' from the beginning of the string
+        
+        if (subRange.location != NSNotFound) {
+            
+            //[tempString deleteCharactersInRange:NSMakeRange(subRange.location,5)];
+            
+            [tempString deleteCharactersInRange:NSMakeRange(subRange.location, 5)];
+
+            
+        }
+        else{
+            
+            NSLog(@"\n\n...ERROR cannot find 'code=' in returned URL callback\n\n");
+        }
+        
+        // now remove '&state=xyz' from the end
+        
+        subRange = [tempString rangeOfString:@"&state=123"];
+        
+        NSLog(@"\n\n...after searching for '&state=123'...subrange.location = %lu, subrange.length = %lu\n\n", (unsigned long)subRange.location, (unsigned long)subRange.length);
+        
+        if (subRange.location != NSNotFound) {
+            
+            //[tempString deleteCharactersInRange:NSMakeRange(subRange.location,5)];
+            
+            [tempString deleteCharactersInRange:NSMakeRange(subRange.location, 10)];
+            
+            
+        }
+        else{
+            
+            NSLog(@"\n\n...ERROR cannot find '&state=123' in returned URL callback\n\n");
+        }
+        
+        authorizationToken = (NSString*)tempString;
+        
+        NSLog(@"...\n\nauthorization token received = %@\n\n", authorizationToken);
+        
+        return YES;
+        
+    }
+    else return NO;
+        
+}
+
 @end

@@ -40,6 +40,7 @@
 		80F646761B6D3F9000CD8600 /* OauthTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OauthTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		80F6467B1B6D3F9000CD8600 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80F6467C1B6D3F9000CD8600 /* OauthTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OauthTestTests.m; sourceTree = "<group>"; };
+		80F646861B6D748200CD8600 /* globalSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = globalSettings.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +84,7 @@
 			children = (
 				80F646641B6D3F8F00CD8600 /* AppDelegate.h */,
 				80F646651B6D3F8F00CD8600 /* AppDelegate.m */,
+				80F646861B6D748200CD8600 /* globalSettings.h */,
 				80F646671B6D3F8F00CD8600 /* ViewController.h */,
 				80F646681B6D3F8F00CD8600 /* ViewController.m */,
 				80F6466A1B6D3F8F00CD8600 /* Main.storyboard */,
