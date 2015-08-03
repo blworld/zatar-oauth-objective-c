@@ -15,9 +15,13 @@ NSString *authorizationToken;
     UIButton *authorizeButton;
     UITextView *eventLogTextView;
     
-    NSMutableData *authBuffer;
+    NSMutableData *authBuffer, *accessTokenBuffer;
     
-    NSURLConnection *requestAuthTokenConnection;
+    NSURLConnection *requestAuthTokenConnection, *AccessTokenConnection;
+    
+    NSString *currentContentType, *accessToken, *refreshToken, *scopes, *expires;
+    
+    NSMutableString *eventLogTextString;
     
 }
 

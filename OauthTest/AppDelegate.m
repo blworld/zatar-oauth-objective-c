@@ -44,29 +44,34 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
     
+#if DEBUG
     NSLog(@"\n\n...OauthTest AppDelegate...inside applicationOpenUrlSourceApplicationAnnotation!!\n\n");
-    
     NSLog(@"Calling Application Bundle ID: %@", sourceApplication);
     NSLog(@"URL scheme:%@", [url scheme]);
     NSLog(@"URL query: %@", [url query]);
+#endif
     
     NSMutableString *tempString = [[NSMutableString alloc]initWithCapacity:128];
     
     NSRange subRange;
 
     if ([[url scheme] isEqualToString:@"oauthtestapp"]) {
+        
         // valid callback has occurred - now get authorization token
         
+#if DEBUG
         NSLog(@"\n\n...VALID URL scheme detected - loading Authorization token into global variable\n\n");
-        
+#endif
         [tempString setString:[url query]];
         
+#if DEBUG
         NSLog(@"\n\n...tempString = %@\n\n", tempString);
-        
+#endif
         subRange = [tempString rangeOfString:@"code="];
         
+#if DEBUG
         NSLog(@"\n\n...after searching for 'code='...subrange.location = %lu, subrange.length = %lu\n\n", (unsigned long)subRange.location, (unsigned long)subRange.length);
-        
+#endif
         // first remove 'code=' from the beginning of the string
         
         if (subRange.location != NSNotFound) {
@@ -79,14 +84,18 @@
         }
         else{
             
+#if DEBUG
             NSLog(@"\n\n...ERROR cannot find 'code=' in returned URL callback\n\n");
+#endif
         }
         
         // now remove '&state=xyz' from the end
         
         subRange = [tempString rangeOfString:@"&state=123"];
         
+#if DEBUG
         NSLog(@"\n\n...after searching for '&state=123'...subrange.location = %lu, subrange.length = %lu\n\n", (unsigned long)subRange.location, (unsigned long)subRange.length);
+#endif
         
         if (subRange.location != NSNotFound) {
             
@@ -98,12 +107,16 @@
         }
         else{
             
+#if DEBUG
             NSLog(@"\n\n...ERROR cannot find '&state=123' in returned URL callback\n\n");
+#endif
         }
         
         authorizationToken = (NSString*)tempString;
         
-        NSLog(@"...\n\nauthorization token received = %@\n\n", authorizationToken);
+#if DEBUG
+        NSLog(@"...\n\n...appDelegate...authorization token received = %@\n\n", authorizationToken);
+#endif
         
         return YES;
         

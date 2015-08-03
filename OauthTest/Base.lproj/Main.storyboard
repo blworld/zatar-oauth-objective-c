@@ -17,13 +17,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Oauth Test" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1s4-gH-GZm">
-                                <rect key="frame" x="0.0" y="42" width="600" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <rect key="frame" x="0.0" y="42" width="600" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Tap to authorize this app:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnZ-sI-fvh">
+                                <rect key="frame" x="70" y="126" width="397" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Log text will be inserted here." translatesAutoresizingMaskIntoConstraints="NO" id="AP4-HS-GJX">
+                                <rect key="frame" x="29" y="192" width="542" height="388"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Event Log:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rxe-ww-DcU">
+                                <rect key="frame" x="32" y="169" width="119" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHR-ma-aGa">
-                                <rect key="frame" x="421" y="122" width="90" height="30"/>
+                                <rect key="frame" x="490" y="122" width="90" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="7Qy-xc-Pxb"/>
@@ -37,36 +55,19 @@
                                     <action selector="tappedOnAuthorizeButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HV3-Pm-AoC"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Tap to authorize this app:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnZ-sI-fvh">
-                                <rect key="frame" x="0.0" y="126" width="397" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Log text will be inserted here." translatesAutoresizingMaskIntoConstraints="NO" id="AP4-HS-GJX">
-                                <rect key="frame" x="29" y="192" width="542" height="318"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Event Log:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rxe-ww-DcU">
-                                <rect key="frame" x="34" y="168" width="119" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.81601761068932033" green="0.81545119603933003" blue="0.86207268646408841" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="1s4-gH-GZm" secondAttribute="centerX" id="1nh-bJ-ZqR"/>
                             <constraint firstItem="bHR-ma-aGa" firstAttribute="centerY" secondItem="pnZ-sI-fvh" secondAttribute="centerY" id="2Nr-wM-CBu"/>
                             <constraint firstItem="AP4-HS-GJX" firstAttribute="top" secondItem="pnZ-sI-fvh" secondAttribute="bottom" constant="45" id="DMQ-SB-VtE"/>
                             <constraint firstItem="AP4-HS-GJX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="G2C-lh-zAQ"/>
                             <constraint firstItem="1s4-gH-GZm" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="22" id="MMv-vD-x34"/>
-                            <constraint firstItem="bHR-ma-aGa" firstAttribute="leading" secondItem="pnZ-sI-fvh" secondAttribute="trailing" constant="24" id="Mf7-cu-cGX"/>
-                            <constraint firstItem="AP4-HS-GJX" firstAttribute="leading" secondItem="Rxe-ww-DcU" secondAttribute="leading" constant="-5" id="Ow4-xV-Rsu"/>
-                            <constraint firstAttribute="trailing" secondItem="bHR-ma-aGa" secondAttribute="trailing" constant="50" id="Rpc-gB-U6a"/>
-                            <constraint firstAttribute="bottom" secondItem="AP4-HS-GJX" secondAttribute="bottom" constant="100" id="g59-6E-ygw"/>
+                            <constraint firstItem="bHR-ma-aGa" firstAttribute="leading" secondItem="pnZ-sI-fvh" secondAttribute="trailing" constant="10" id="Mf7-cu-cGX"/>
+                            <constraint firstItem="AP4-HS-GJX" firstAttribute="leading" secondItem="Rxe-ww-DcU" secondAttribute="leading" id="Ow4-xV-Rsu"/>
+                            <constraint firstAttribute="trailing" secondItem="bHR-ma-aGa" secondAttribute="trailing" constant="30" id="Rpc-gB-U6a"/>
+                            <constraint firstItem="AP4-HS-GJX" firstAttribute="top" secondItem="Rxe-ww-DcU" secondAttribute="bottom" constant="2" id="arW-qF-lm6"/>
+                            <constraint firstAttribute="bottom" secondItem="AP4-HS-GJX" secondAttribute="bottom" constant="20" id="g59-6E-ygw"/>
                             <constraint firstItem="bHR-ma-aGa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="102" id="jkj-y6-ypB"/>
                             <constraint firstAttribute="trailing" secondItem="AP4-HS-GJX" secondAttribute="trailing" constant="30" id="p6S-tg-0c4"/>
                             <constraint firstItem="pnZ-sI-fvh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="qM2-Le-GCb"/>
