@@ -24,8 +24,20 @@ Once the app returns to the foreground, you should be able to review the entire 
 If you like you can set DEBUG to TRUE in globalSettings.h, and also view progress of the app on the Xcode console.
 
 # Some Details
+## Redirect URI
 This app uses the "Authorization Code" grant flow of Oauth 2.0. For more info on Oauth, go to http://oauth.net. In order to get this grant flow to work on a native iOS app, you need to configure a couple of things properly. First, you must configure a custom URL scheme for your app which will allow the Oauth Authentication Server to call-back into your app after authorization has been granted by the resource owner. This custom URL scheme is configured in the info.plist file of your app using the key "URL Types" which you must add. You need to add both a URL Identifier and URL Scheme. You must then include a redirect URI in your authorization request that makes use of this URL scheme.
 
+If you want to use this code in your own app, make sure to change any references to Zebra Technologies (like the URL Identifier above), since the entitlements will be different.
+
+# Include "State" parameter
+Another security measure in Oauth is the inclusion of a "state" parameter, which is essentially a string of your choice that you add to the grant flow. The authentication server sends this string back during the redirect which you should then verify to make sure the call has not been intercepted somewhere along the way. 
+
+This app uses state=123 as the parameter. 
+
+# AppDelegate
+In order to receive redirects, your AppDelegate needs to support the method -(BOOL)application:openURL:soureApplication:annotation method. This is where the call-back enters your app.
+
+# Get Notified when App is invoked through Redirection
 Another thing this app does is register to be notified when the app becomes active (-(void)justBecameActive method) so it knows when the redirection has taken place.
 
 Refer to the code for more detail.
