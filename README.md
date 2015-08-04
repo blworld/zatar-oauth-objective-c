@@ -23,7 +23,7 @@ Once the app returns to the foreground, you should be able to review the entire 
 
 If you like you can set DEBUG to TRUE in globalSettings.h, and also view progress of the app on the Xcode console.
 
-# Theory
+# Some Details
 This app uses the "Authorization Code" grant flow of Oauth 2.0. For more info on Oauth, go to http://oauth.net. In order to get this grant flow to work on a native iOS app, you need to configure a couple of things properly. First, you must configure a custom URL scheme for your app which will allow the Oauth Authentication Server to call-back into your app after authorization has been granted by the resource owner. This custom URL scheme is configured in the info.plist file of your app using the key "URL Types" which you must add. You need to add both a URL Identifier and URL Scheme. You must then include a redirect URI in your authorization request that makes use of this URL scheme.
 
 Another thing this app does is register to be notified when the app becomes active (-(void)justBecameActive method) so it knows when the redirection has taken place.
