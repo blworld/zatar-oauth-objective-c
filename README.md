@@ -7,7 +7,7 @@ Your app must pass a Valid Access Token to Zatar when accessing resources on beh
 # Running the Sample app
 To run this app, simply import the entire project into your own Xcode environment. The app was written with Xcode 6.4, so make sure you have this version or higher.
 ## Getting Started
-The app should compile and run on any iOS device, including the simulator. It has a minimal UI, but it does use constraints, so it should at least be readable on any device type you choose.
+The app should compile and run on any iOS device, including the simulator. It has a minimal UI, but it does use constraints, so it should be readable on any iOS device you choose.
 Before you can run the code, you'll need to do the following:
 
  1. Obtain a valid ClientID and Secret from the site you want to obtain authorization from. NOTE that, although this app should work with any OAuth 2.0 comaptible site, it has only been tested with Zatar's beta site api authentication server (https://beta-api.zatar.com/v2). To obtain a ClientID and Secret for accessing Zatar resources, you need to go to the Zatar Developer Portal at developer.zatar.com and register as a developer (it's free). Then, simply to to the Application Manager section and register your application to receive a ClientID and Secret.
