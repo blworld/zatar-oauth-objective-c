@@ -16,11 +16,11 @@ Before you can run the code, you'll need to do the following:
  4. By default, the app is set to go to Zatar for authorization, but this can be changed by changing the "ROOTURI" parameter of the globalSettings.h file. Initially this parameter is set to the Zatar beta test site.
 
 That's it! Once you have valid info entered into globalSettings.h for CLIENT_ID, BASE_64_CLIENT_ID_SECRET, and ROOTURI, the app should compile and run.
-
+## Operation
 When the app runs, simply tap on "Authorize" button to initiate the authorization attempt. This should result in a Safari window opening up. You should be asked by target site for your credentials and to authorize the app to access the resources of your account. Enter your credentials to give authorization, and if the credentials are verified, you should be taken back to this app. 
-
+## Event Log
 Once the app returns to the foreground, you should be able to review the entire progress of the process on the event log displayed on the app's main screen. At the bottom of the log (you may have to scroll up/down to see the entire log) you should see your Access and Refresh tokens displayed.
-
+## Debug Log
 If you like you can set DEBUG to TRUE in globalSettings.h, and also view progress of the app on the Xcode console.
 
 # Some Details
@@ -29,15 +29,15 @@ This app uses the "Authorization Code" grant flow of Oauth 2.0. For more info on
 
 If you want to use this code in your own app, make sure to change any references to Zebra Technologies (like the URL Identifier above), since the entitlements will be different.
 
-# Include "State" parameter
+## Include "State" parameter
 Another security measure in Oauth is the inclusion of a "state" parameter, which is essentially a string of your choice that you add to the grant flow. The authentication server sends this string back during the redirect which you should then verify to make sure the call has not been intercepted somewhere along the way. 
 
 This app uses state=123 as the parameter. 
 
-# AppDelegate
+## AppDelegate
 In order to receive redirects, your AppDelegate needs to support the method -(BOOL)application:openURL:soureApplication:annotation method. This is where the call-back enters your app.
 
-# Get Notified when App is invoked through Redirection
+## Get Notified when App is invoked through Redirection
 Another thing this app does is register to be notified when the app becomes active (-(void)justBecameActive method) so it knows when the redirection has taken place.
 
 Refer to the code for more detail.
