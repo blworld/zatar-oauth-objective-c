@@ -1,5 +1,5 @@
 # Oauth_Test_1
-Using Oauth 2.0 to authorize a native iOS app 
+Using Oauth 2.0 to authorize a native iOS app on Zatar
 # Running this sample app
 To run this app, simply import the entire project into your own xCode environment. The app was written with xCode 6.4, so make sure you have this version or higher.
 ## Getting Started
