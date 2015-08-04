@@ -1,7 +1,7 @@
 # Oauth_Test_1
 Using Oauth 2.0 to authorize a native iOS app on Zatar
 # Running this sample app
-To run this app, simply import the entire project into your own xCode environment. The app was written with xCode 6.4, so make sure you have this version or higher.
+To run this app, simply import the entire project into your own Xcode environment. The app was written with Xcode 6.4, so make sure you have this version or higher.
 ## Getting Started
 The app should compile and run on any iOS device, including the simulator. It has a minimal UI, but it does use constraints, so it should at least be readable on any device type you choose.
 Before you can run the code, you'll need to do the following:
@@ -17,4 +17,4 @@ When the app runs, simply tap on "Authorize" button to initiate the authorizatio
 
 Once the app returns to the foreground, you should be able to review the entire progress of the process on the event log displayed on the app's main screen. At the bottom of the log (you may have to scroll up/down to see the entire log) you should see your Access and Refresh tokens displayed.
 
-If you like you can set DEBUG to TRUE in globalSettings.h, and also view progress of the app on the xCode console.
+If you like you can set DEBUG to TRUE in globalSettings.h, and also view progress of the app on the Xcode console.
