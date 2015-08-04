@@ -9,9 +9,11 @@
 #ifndef OauthTest_globalSettings_h
 #define OauthTest_globalSettings_h
 
-#define BASE_64_CLIENT_ID_SECRET @"insertYourClientID:SecretHere"             // clientID:secret base64 encoded
+#define CLIENT_ID @"enterYourClientIDHere"      // unencoded clientID goes here
 
-#define ROOT_URI @"https://beta-api.zatar.com/v2"
+#define BASE_64_CLIENT_ID_SECRET @"enterYourBase64EncodedClientID:SecretHere"             // clientID:secret base64 encoded goes here
+
+#define ROOT_URI @"https://beta-api.zatar.com/v2"           // rootURI goes here
 
 #define DEBUG FALSE
 

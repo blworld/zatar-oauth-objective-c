@@ -41,6 +41,7 @@
                                                  name:UIApplicationDidBecomeActiveNotification object:nil];
     
     [eventLogTextString appendString:@"OauthTest iOS Native App Oauth Example Project\n"];
+    [eventLogTextString appendString:[NSString stringWithFormat: @"\nClientID: %@\n", CLIENT_ID]];
     [eventLogTextString appendString:[NSString stringWithFormat: @"\nClientID:Secret Base64 encoded:\n%@\n", BASE_64_CLIENT_ID_SECRET]];
     [eventLogTextString appendString:[NSString stringWithFormat: @"\nRootUri:\n%@\n", ROOT_URI]];
 
@@ -60,7 +61,7 @@
     
     // first set up request for authorization code by providing clientID/secret and redirect URI in http GET
     
-    NSString *targetString = [NSString stringWithFormat:@"%@/authorize?response_type=code&client_id=iphone-app&state=123&redirect_uri=OauthTestApp%%3A%%2F%%2FAuthorize%%2Ecom&scope=read,update,create",ROOT_URI];
+    NSString *targetString = [NSString stringWithFormat:@"%@/authorize?response_type=code&client_id=%@&state=123&redirect_uri=OauthTestApp%%3A%%2F%%2FAuthorize%%2Ecom&scope=read,update,create", ROOT_URI, CLIENT_ID];
     
 #if DEBUG
     NSLog(@"\n\nzviewController.m...tappedOnAuthorizeButton...targetString = %@\n\n", targetString);
@@ -131,9 +132,7 @@
     [AccessTokenRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
     [AccessTokenRequest setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Accept"];
-    
-    [AccessTokenRequest setValue:@"ZatarRDM/iPhone" forHTTPHeaderField:@"User-Agent"];
-    
+        
     // put app base-64 encoded clientID:secret for your app into "authorization" field
     
     NSString *authString = [NSString stringWithFormat:@"Basic %@", BASE_64_CLIENT_ID_SECRET];
