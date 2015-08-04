@@ -8,4 +8,5 @@ Before you can run the code, you'll need to do the following:
  1. Obtain a valid ClientID and Secret from the site you want to obtain authorization from. By default, the app is set to try to gain authorization from Zatar but that can be changed in the header file named "globalSettings.h". 
  Just open up this file using Xcode and look for the #define ROOTURI statement. Then change the "rootUri" value to whatever you want.
  2. You will need to create the Base64 encoded equivalent of your ClientID:Secret and insert it in the globalSettings.h file where indicated.
- 3. 
+
+That's it! Once you have valid info entered into globalSettings.h for rootUri and BASE_64_CLIENT_ID_SECRET, the app should compile and run.
