@@ -6,7 +6,7 @@ To run this app, simply import the entire project into your own xCode environmen
 The app should compile and run on any iOS device, including the simulator. It has a minimal UI, but it does use constraints, so it should at least be readable on any device type you choose.
 Before you can run the code, you'll need to do the following:
 
- 1. Obtain a valid ClientID and Secret from the site you want to obtain authorization from.  
+ 1. Obtain a valid ClientID and Secret from the site you want to obtain authorization from. NOTE this app has only been tested with Zatar's beta site api authentication server.
  2. Enter your ClientID for the "CLIENT_ID" parameter in the "globalSettings.h" file of the project.
  3. You will need to create the Base64 encoded equivalent of your ClientID:Secret and insert it in the globalSettings.h file where indicated for the BASE_64_CLIENT_ID_SECRET parameter.
  4. By default the project is set to go to Zatar.com for authorization, but this can be changed by changing the "ROOTURI" parameter of the globalSettings.h file. Initially this parameter is set to the Zatar beta test site.
