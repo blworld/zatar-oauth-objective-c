@@ -42,7 +42,7 @@
     
     [eventLogTextString appendString:@"OauthTest iOS Native App Oauth Example Project\n"];
     [eventLogTextString appendString:[NSString stringWithFormat: @"\nClientID: %@\n", CLIENT_ID]];
-    [eventLogTextString appendString:[NSString stringWithFormat: @"\nClientID:Secret Base64 encoded:\n%@\n", BASE_64_CLIENT_ID_SECRET]];
+    [eventLogTextString appendString:[NSString stringWithFormat: @"\nSecret: %@\n", SECRET]];
     [eventLogTextString appendString:[NSString stringWithFormat: @"\nRootUri:\n%@\n", ROOT_URI]];
 
     eventLogTextView.text = eventLogTextString;
@@ -132,19 +132,26 @@
     [AccessTokenRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
     [AccessTokenRequest setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Accept"];
-        
+    
     // put app base-64 encoded clientID:secret for your app into "authorization" field
     
-    NSString *authString = [NSString stringWithFormat:@"Basic %@", BASE_64_CLIENT_ID_SECRET];
+    NSMutableString *clientIDSecret = [[NSMutableString alloc]initWithCapacity:256];
     
-    [eventLogTextString appendString:[NSString stringWithFormat:@"\n\n...Authentication String:\n%@", authString]];
-    eventLogTextView.text = eventLogTextString;
+    [clientIDSecret setString:[NSString stringWithFormat:@"%@:%@", CLIENT_ID, SECRET]];   // initialize with clientID:secret from globalsettings.h
     
-#if DEBUG
-    NSLog(@"\n\n...authorization header string: %@\n\n", authString);
+    NSData *binaryUTF8encodedClientIDSecret = [clientIDSecret dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSString *base64EncodedClientIDSecret = [binaryUTF8encodedClientIDSecret base64EncodedStringWithOptions:0];
+    
+#if DEBUG || TERSE_DEBUG
+    NSLog(@"\n\n...base 64 encoded clientID:secret = %@\n\n", base64EncodedClientIDSecret);
 #endif
     
-    [AccessTokenRequest setValue: authString forHTTPHeaderField:@"Authorization"];
+    [AccessTokenRequest setValue:[NSString stringWithFormat:@"Basic %@", base64EncodedClientIDSecret] forHTTPHeaderField:@"Authorization"];
+    
+    [eventLogTextString appendString:[NSString stringWithFormat:@"\n\n...Base 64 encoded clientID:secret:\n%@", base64EncodedClientIDSecret]];
+    
+    eventLogTextView.text = eventLogTextString;
     
     [AccessTokenRequest setHTTPMethod:@"POST"];
     

@@ -11,7 +11,7 @@
 
 #define CLIENT_ID @"enterYourClientIDHere"      // unencoded clientID goes here
 
-#define BASE_64_CLIENT_ID_SECRET @"enterYourBase64EncodedClientID:SecretHere"             // clientID:secret base64 encoded goes here
+#define SECRET  @"enterYourSecretHere"      // unencoded secret goes here
 
 #define ROOT_URI @"https://beta-api.zatar.com/v2"           // rootURI goes here
 
