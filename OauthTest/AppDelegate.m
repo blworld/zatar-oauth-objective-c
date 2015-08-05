@@ -76,11 +76,8 @@
         
         if (subRange.location != NSNotFound) {
             
-            //[tempString deleteCharactersInRange:NSMakeRange(subRange.location,5)];
-            
-            [tempString deleteCharactersInRange:NSMakeRange(subRange.location, 5)];
+            [tempString deleteCharactersInRange:NSMakeRange(subRange.location, subRange.length)];
 
-            
         }
         else{
             
@@ -93,20 +90,17 @@
         
         // now remove '&state=xyz' from the end
         
-        subRange = [tempString rangeOfString:@"&state=123"];
-        
+        subRange = [tempString rangeOfString:[NSString stringWithFormat:@"&state=%@", STATE]];
+                
         if (subRange.location != NSNotFound) {
             
-            //[tempString deleteCharactersInRange:NSMakeRange(subRange.location,5)];
-            
-            [tempString deleteCharactersInRange:NSMakeRange(subRange.location, 10)];
-            
+            [tempString deleteCharactersInRange:NSMakeRange(subRange.location, subRange.length)];
             
         }
         else{
             
 #if DEBUG
-            NSLog(@"\n\n...ERROR cannot find '&state=123' in returned URL callback..returning NO and NOT updating authorizationToken\n\n");
+            NSLog(@"\n\n...ERROR cannot find '&state=%@' in returned URL callback..returning NO and NOT updating authorizationToken\n\n", STATE);
 #endif
             return NO;
         }

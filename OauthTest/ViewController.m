@@ -43,6 +43,7 @@
     [eventLogTextString appendString:@"OauthTest iOS Native App Oauth Example Project\n"];
     [eventLogTextString appendString:[NSString stringWithFormat: @"\nClientID: %@\n", CLIENT_ID]];
     [eventLogTextString appendString:[NSString stringWithFormat: @"\nSecret: %@\n", SECRET]];
+    [eventLogTextString appendString:[NSString stringWithFormat: @"\nState: %@\n", STATE]];
     [eventLogTextString appendString:[NSString stringWithFormat: @"\nRootUri:\n%@\n", ROOT_URI]];
 
     eventLogTextView.text = eventLogTextString;
@@ -61,7 +62,7 @@
     
     // first set up request for authorization code by providing clientID/secret and redirect URI in http GET
     
-    NSString *targetString = [NSString stringWithFormat:@"%@/authorize?response_type=code&client_id=%@&state=123&redirect_uri=OauthTestApp%%3A%%2F%%2FAuthorize%%2Ecom&scope=read,update,create", ROOT_URI, CLIENT_ID];
+    NSString *targetString = [NSString stringWithFormat:@"%@/authorize?response_type=code&client_id=%@&state=%@&redirect_uri=OauthTestApp%%3A%%2F%%2FAuthorize%%2Ecom&scope=read,update,create", ROOT_URI, CLIENT_ID, STATE];
     
 #if DEBUG
     NSLog(@"\n\nzviewController.m...tappedOnAuthorizeButton...targetString = %@\n\n", targetString);
@@ -95,6 +96,10 @@
 #endif
     
     if (authorizationToken != NULL) {
+        
+        [eventLogTextString appendString:[NSString stringWithFormat:@"\n--> Received Authorization Code:\n%@\n", authorizationToken]];
+        eventLogTextView.text = eventLogTextString;
+        
         [self getAccessTokenUsingAuthorizationToken];
     }
     else{
@@ -114,7 +119,7 @@
     NSLog(@"\n\n...OauthTest...viewController.m...inside getAccessTokenUsingAuthorizationToken...\n\n");
 #endif
     
-    [eventLogTextString appendString:@"\n...Attempting to Authenticate..."];
+    [eventLogTextString appendString:@"\n...Attempting to Obtain Access/Refresh Tokens..."];
     eventLogTextView.text = eventLogTextString;
     
     NSString *targetString = [NSString stringWithFormat:@"%@/token", ROOT_URI];
@@ -298,9 +303,15 @@
                 
                 // print out in text box
                 
-                [eventLogTextString appendString: [NSString stringWithFormat:@"\n\nApplication Successfully Authorized\n"]];
-                [eventLogTextString appendString: [NSString stringWithFormat:@"\nNew Access Token:\n%@\n", accessToken]];
-                [eventLogTextString appendString: [NSString stringWithFormat:@"\nNew Refresh Token:\n%@\n", refreshToken]];
+                if (accessToken != NULL && refreshToken != NULL) {
+                    [eventLogTextString appendString: [NSString stringWithFormat:@"\n\n--> Application Successfully Authorized\n"]];
+                    [eventLogTextString appendString: [NSString stringWithFormat:@"\nNew Access Token:\n%@\n", accessToken]];
+                    [eventLogTextString appendString: [NSString stringWithFormat:@"\nNew Refresh Token:\n%@\n", refreshToken]];
+                }
+                else{
+                    [eventLogTextString appendString: [NSString stringWithFormat:@"\n\n--> ERROR NULL Tokens Received\n"]];
+                }
+
                 
                 eventLogTextView.text = eventLogTextString;
                                
