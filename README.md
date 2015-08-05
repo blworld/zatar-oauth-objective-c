@@ -31,7 +31,7 @@ This app uses the "Authorization Code" grant flow of Oauth 2.0. For more info on
 If you want to use this code in your own app, make sure to change any references to Zebra Technologies (like the URL Identifier above), since the entitlements will be different.
 
 ## Include "State" parameter
-Another security measure in Oauth is the inclusion of a "state" parameter, which is essentially a string of your choice that you add to the grant flow. The authentication server sends this string back during the redirect which you should then verify to make sure the call has not been intercepted somewhere along the way. 
+Another security measure in Oauth is the inclusion of a "State" parameter, which is essentially a string of your choice that you add to the grant flow. The authentication server sends this string back during the redirect which you should then verify to make sure the call has not been intercepted somewhere along the way. 
 
 For this sample app, simply enter your value for State in globalSettings.h. The app will verify that the proper value for State is returned in the call-back and if not the app will signal a failure. 
 
