@@ -12,7 +12,7 @@ Before you can run the code, you'll need to do the following:
 
  1. Obtain a valid ClientID and Secret from the site you want to obtain authorization from. NOTE that, although this app should work with any OAuth 2.0 comaptible site, it has only been tested with Zatar's beta site api authentication server (https://beta-api.zatar.com/v2). To obtain a ClientID and Secret for accessing Zatar resources, you need to go to the Zatar Developer Portal at developer.zatar.com and register as a developer (it's free). Then, simply go to the Application Manager section and register your application to receive a ClientID and Secret.
  2. Enter your ClientID for the "CLIENT_ID" parameter in the "globalSettings.h" file of the project.
- 3. You will need to create the Base64 encoded equivalent of the quantity ClientID:Secret and insert it in the globalSettings.h file where indicated for the BASE_64_CLIENT_ID_SECRET parameter. An easy way to obtain this value is to go to a site such as https://www.base64encode.org/ and type as input "ClientID:Secret" (no quotes, separated by a colon) and it will encode it for you.
+ 3. Enter your Secret for the "SECRET" parameter in the "globalSettings.h" file of the project.
  4. By default, the app is set to go to Zatar for authorization, but this can be changed by changing the "ROOTURI" parameter of the globalSettings.h file. Initially this parameter is set to the Zatar beta test site.
 
 That's it! Once you have valid info entered into globalSettings.h for CLIENT_ID, BASE_64_CLIENT_ID_SECRET, and ROOTURI, the app should compile and run.
