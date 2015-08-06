@@ -17,6 +17,8 @@
 
 #define STATE @"123"                                        // random value for state
 
-#define DEBUG FALSE
+#define CUSTOM_URL_SCHEME   @"OauthTestApp"             // this will be the root of your redirect URI; it must also be in your info.plist file!
+
+#define DEBUG TRUE
 
 #endif

@@ -60,8 +60,12 @@
     NSMutableString *tempString = [[NSMutableString alloc]initWithCapacity:128];
     
     NSRange subRange;
-
-    if ([[url scheme] isEqualToString:@"oauthtestapp"]) {
+    
+    NSString *customUrlScheme = CUSTOM_URL_SCHEME;
+    
+    NSComparisonResult compareResult = [customUrlScheme caseInsensitiveCompare:[url scheme]];
+    
+    if (compareResult == NSOrderedSame) {
         
         // valid callback has occurred - now get authorization token
         
@@ -82,7 +86,7 @@
         else{
             
 #if DEBUG
-            NSLog(@"\n\n...ERROR cannot find 'code=' in returned URL callback...returning NO and NOT updating authorizationToken\n\n");
+            NSLog(@"\n\n...ERROR ---> Cannot find 'code=' in returned URL callback...returning NO and NOT updating authorizationToken\n\n");
 #endif
             return NO;
             
@@ -100,7 +104,7 @@
         else{
             
 #if DEBUG
-            NSLog(@"\n\n...ERROR cannot find '&state=%@' in returned URL callback..returning NO and NOT updating authorizationToken\n\n", STATE);
+            NSLog(@"\n\n...ERROR ---> Cannot find '&state=%@' in returned URL callback..returning NO and NOT updating authorizationToken\n\n", STATE);
 #endif
             return NO;
         }
@@ -108,14 +112,21 @@
         authorizationToken = (NSString*)tempString;
         
 #if DEBUG
-        NSLog(@"...\n\n...appDelegate...authorization token received = %@...updating authorizationToken and returning YES\n\n", authorizationToken);
+        NSLog(@"...\n\n...SUCCESS!...appDelegate...authorization token received = %@...updating authorizationToken and returning YES\n\n", authorizationToken);
 #endif
         
         return YES;
         
     }
-    
-    else return NO;
+
+    else{
+        
+#if DEBUG
+        NSLog(@"...\n\n...ERROR ---> appDelegate...URL scheme returned = %@...not equal to URL scheme sent = %@...exiting - doing nothing.\n\n", [url scheme], [NSString stringWithFormat:@"%@", CUSTOM_URL_SCHEME]);
+#endif
+        
+        return NO;
+    }
         
 }
 

@@ -23,6 +23,8 @@ NSString *authorizationToken;
     
     NSMutableString *eventLogTextString;
     
+    UIAlertView *infoAlert;
+    
 }
 
 @property(nonatomic, retain) IBOutlet UIButton *authorizeButton;

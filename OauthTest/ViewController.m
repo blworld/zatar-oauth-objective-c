@@ -61,8 +61,8 @@
     [authBuffer setData:(NSData*)NULL];
     
     // first set up request for authorization code by providing clientID/secret and redirect URI in http GET
-    
-    NSString *targetString = [NSString stringWithFormat:@"%@/authorize?response_type=code&client_id=%@&state=%@&redirect_uri=OauthTestApp%%3A%%2F%%2FAuthorize%%2Ecom&scope=read,update,create", ROOT_URI, CLIENT_ID, STATE];
+
+    NSString *targetString = [NSString stringWithFormat:@"%@/authorize?response_type=code&client_id=%@&state=%@&redirect_uri=%@%%3A%%2F%%2FAuthorize%%2Ecom&scope=read,update,create", ROOT_URI, CLIENT_ID, STATE, CUSTOM_URL_SCHEME];
     
 #if DEBUG
     NSLog(@"\n\nzviewController.m...tappedOnAuthorizeButton...targetString = %@\n\n", targetString);
@@ -87,6 +87,8 @@
 
 -(void)justBecameActive{
     
+
+    
 #if DEBUG
     
     NSLog(@"\n\n...OauthTest...viewController.m...inside justBecameActive...\n\n");
@@ -106,8 +108,17 @@
         
 #if DEBUG
         
-        NSLog(@"\n\n...authorization token is NULL ...doing nothing.\n\n");
+        NSLog(@"\n\n...authorization token is NULL ...TAP Authorize Button\n\n");
 #endif
+        
+        [eventLogTextString appendString:[NSString stringWithFormat:@"\n...No Valid Authorization Code Detected...\n"]];
+        eventLogTextView.text = eventLogTextString;
+        
+        if (!infoAlert) {
+            infoAlert =[[UIAlertView alloc]initWithTitle:@"Alert" message:@"No Valid Authorization Code Detected\nPlease Tap Authorize Button\nYour browswer will then open and you will be taken to the host website to log in and provide authorization for this app to access your resources\nThen you will be returned to this app to view your Access and Refresh Tokens" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        }
+        
+        [infoAlert show];
         
     }
     
@@ -160,7 +171,7 @@
     
     [AccessTokenRequest setHTTPMethod:@"POST"];
     
-    NSString *requestPayload = [NSString stringWithFormat:@"grant_type=authorization_code&code=%@&redirect_uri=OauthTestApp%%3A%%2F%%2FAuthorize%%2Ecom",authorizationToken];
+    NSString *requestPayload = [NSString stringWithFormat:@"grant_type=authorization_code&code=%@&redirect_uri=%@%%3A%%2F%%2FAuthorize%%2Ecom",authorizationToken, CUSTOM_URL_SCHEME];
     
     [eventLogTextString appendString:[NSString stringWithFormat:@"\n\n...Request Payload:\n%@", requestPayload]];
     eventLogTextView.text = eventLogTextString;
@@ -314,7 +325,13 @@
 
                 
                 eventLogTextView.text = eventLogTextString;
-                               
+                
+                NSRange subRange = [eventLogTextView.text rangeOfString:refreshToken];
+                
+                if (subRange.location != NSNotFound) {
+                    [eventLogTextView scrollRangeToVisible:subRange];
+                }
+                
                 
             }
             else{
