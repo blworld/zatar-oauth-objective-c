@@ -13,6 +13,7 @@ Before you can run the code, you'll need to do the following:
  1. Obtain a valid ClientID and Secret from the site you want to obtain authorization from. NOTE that, although this app should work with any OAuth 2.0 comaptible site, it has only been tested with Zatar's beta site api authentication server (https://beta-api.zatar.com/v2). To obtain a ClientID and Secret for accessing Zatar resources, you need to go to the Zatar Developer Portal at developer.zatar.com and register as a developer (it's free). Then, simply go to the Application Manager section and register your application to receive a ClientID and Secret.
  2. Enter your ClientID for the "CLIENT_ID" parameter in the "globalSettings.h" file of the project.
  3. Enter your Secret for the "SECRET" parameter in the "globalSettings.h" file of the project.
+ 4. Enter a value for "STATE" (this can be any valid string) in "globalSettings.h" or leave it as is if you like.
  4. By default, the app is set to go to Zatar for authorization, but this can be changed by changing the "ROOTURI" parameter of the globalSettings.h file. Initially this parameter is set to the Zatar beta test site.
 
 That's it! Once you have valid info entered into globalSettings.h for CLIENT_ID, BASE_64_CLIENT_ID_SECRET, and ROOTURI, the app should compile and run.
@@ -30,9 +31,9 @@ This app uses the "Authorization Code" grant flow of Oauth 2.0. For more info on
 If you want to use this code in your own app, make sure to change any references to Zebra Technologies (like the URL Identifier above), since the entitlements will be different.
 
 ## Include "State" parameter
-Another security measure in Oauth is the inclusion of a "state" parameter, which is essentially a string of your choice that you add to the grant flow. The authentication server sends this string back during the redirect which you should then verify to make sure the call has not been intercepted somewhere along the way. 
+Another security measure in Oauth is the inclusion of a "State" parameter, which is essentially a string of your choice that you add to the grant flow. The authentication server sends this string back during the redirect which you should then verify to make sure the call has not been intercepted somewhere along the way. 
 
-This app uses state=123 as the parameter. 
+For this sample app, simply enter your value for State in globalSettings.h. The app will verify that the proper value for State is returned in the call-back and if not the app will signal a failure. 
 
 ## AppDelegate
 In order to receive redirects, your AppDelegate needs to support the method -(BOOL)application:openURL:soureApplication:annotation method. This is where the call-back enters your app.
