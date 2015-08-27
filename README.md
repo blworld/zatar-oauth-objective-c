@@ -17,7 +17,7 @@ Before you can run the code, you'll need to do the following:
  5. If you want, you can change the value of "CUSTOM_URL_SCHEME" in globalSettings.h. If you do, you MUST also put this value in the appropriate place in your info.plist file. 
  6. By default, the app is set to go to Zatar for authorization, but this can be changed by changing the "ROOTURI" parameter of the globalSettings.h file. Initially this parameter is set to the Zatar beta test site.
 
-That's it! Once you have valid info entered into globalSettings.h for CLIENT_ID, BASE_64_CLIENT_ID_SECRET, and ROOTURI, the app should compile and run.
+That's it! Once you have valid info entered into globalSettings.h for CLIENT_ID, SECRET, STATE, CUSTOM_URL_SCHEME, and ROOTURI, the app should compile and run.
 ## Operation
 When the app runs, simply tap on "Authorize" button to initiate the authorization attempt. This should result in a Safari window opening up. You should be asked by target site for your credentials and to authorize the app to access the resources of your account. Enter your credentials to give authorization, and if the credentials are verified, you should be taken back to this app. 
 ## Event Log
