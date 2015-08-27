@@ -23,7 +23,7 @@ When the app runs, simply tap on "Authorize" button to initiate the authorizatio
 ## Event Log
 Once the app returns to the foreground, you should be able to review the entire progress of the process on the event log displayed on the app's main screen. At the bottom of the log (you may have to scroll up/down to see the entire log) you should see your Access and Refresh tokens displayed.
 ## Debug Log
-If you like you can set DEBUG to TRUE in globalSettings.h, and also view progress of the app on the Xcode console.
+If you like you can set LOG_MESSAGES_ON to TRUE in globalSettings.h, and also view progress of the app on the Xcode console.
 
 # Some Details
 ## Redirect URI
