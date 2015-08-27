@@ -52,7 +52,7 @@
 
 -(IBAction)tappedOnAuthorizeButton:(id)sender{
 
-#if DEBUG
+#if LOG_MESSAGES_ON
     NSLog(@"\n\n...OauthTest...viewController.m...inside tappedOnAuthorizeButton...\n\n");
 #endif
 
@@ -61,10 +61,14 @@
     [authBuffer setData:(NSData*)NULL];
     
     // first set up request for authorization code by providing clientID/secret and redirect URI in http GET
+    
+    // this string will be used to tell the authentication server what type of grant flow, pass parameters, and provide redirect uri
+    
+    // redirect URI: "<CUSTOM_URL_SCHEME>://Authorize.com"
 
     NSString *targetString = [NSString stringWithFormat:@"%@/authorize?response_type=code&client_id=%@&state=%@&redirect_uri=%@%%3A%%2F%%2FAuthorize%%2Ecom&scope=read,update,create", ROOT_URI, CLIENT_ID, STATE, CUSTOM_URL_SCHEME];
     
-#if DEBUG
+#if LOG_MESSAGES_ON
     NSLog(@"\n\nzviewController.m...tappedOnAuthorizeButton...targetString = %@\n\n", targetString);
 #endif
     
@@ -75,7 +79,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     
-#if DEBUG
+#if LOG_MESSAGES_ON
     
     NSLog(@"\n\n...OauthTest...viewController.m...inside viewWillAppear...\n\n");
     
@@ -89,7 +93,7 @@
     
 
     
-#if DEBUG
+#if LOG_MESSAGES_ON
     
     NSLog(@"\n\n...OauthTest...viewController.m...inside justBecameActive...\n\n");
     
@@ -106,7 +110,7 @@
     }
     else{
         
-#if DEBUG
+#if LOG_MESSAGES_ON
         
         NSLog(@"\n\n...authorization token is NULL ...TAP Authorize Button\n\n");
 #endif
@@ -126,7 +130,7 @@
 
 -(void)getAccessTokenUsingAuthorizationToken{
     
-#if DEBUG
+#if LOG_MESSAGES_ON
     NSLog(@"\n\n...OauthTest...viewController.m...inside getAccessTokenUsingAuthorizationToken...\n\n");
 #endif
     
@@ -135,7 +139,7 @@
     
     NSString *targetString = [NSString stringWithFormat:@"%@/token", ROOT_URI];
     
-#if DEBUG
+#if LOG_MESSAGES_ON
     NSLog(@"\n\n...targetString = %@\n\n", targetString);
 #endif
     
@@ -159,7 +163,7 @@
     
     NSString *base64EncodedClientIDSecret = [binaryUTF8encodedClientIDSecret base64EncodedStringWithOptions:0];
     
-#if DEBUG || TERSE_DEBUG
+#if LOG_MESSAGES_ON
     NSLog(@"\n\n...base 64 encoded clientID:secret = %@\n\n", base64EncodedClientIDSecret);
 #endif
     
@@ -176,7 +180,7 @@
     [eventLogTextString appendString:[NSString stringWithFormat:@"\n\n...Request Payload:\n%@", requestPayload]];
     eventLogTextView.text = eventLogTextString;
     
-#if DEBUG
+#if LOG_MESSAGES_ON
     NSLog(@"\n\n...requestPayload = %@\n\n", requestPayload);
 #endif
     
@@ -188,14 +192,14 @@
     
     if (AccessTokenConnection == nil) {
         
-#if DEBUG
+#if LOG_MESSAGES_ON
         NSLog(@"...get access token connection is NIL");
 #endif
         
     }
     else {
         
-#if DEBUG
+#if LOG_MESSAGES_ON
         NSLog(@"...get access token request successfully generated...waiting for callback...");
 #endif
         
@@ -214,7 +218,7 @@
 
 - (void)connection:(NSURLConnection *)theConnection didReceiveResponse:(NSURLResponse *)response{
     
-#if DEBUG
+#if LOG_MESSAGES_ON
     NSLog(@"\n\n---> Entering connectionDidReceiveResponse...connection = %@\n\n", theConnection);
 #endif
         
@@ -228,7 +232,7 @@
     currentContentType = httpResponse.MIMEType;
         
         
-#if DEBUG
+#if LOG_MESSAGES_ON
     
     NSDictionary *responseHeaders = [[NSDictionary alloc]init];
 
@@ -247,7 +251,7 @@
 
 - (void)connection:(NSURLConnection *)theConnection didReceiveData:(NSData *)data{
     
-#if DEBUG
+#if LOG_MESSAGES_ON
     NSLog(@"\n\n---> Entering connectionDidReceiveData...connection = %@\n\n", theConnection);
     NSLog(@"...input buffer length = %i", (int)data.length);
 #endif
@@ -263,7 +267,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)theConnection{
     
-#if DEBUG
+#if LOG_MESSAGES_ON
     NSLog(@"\n\n---> Entering connectionDidFinishLoading method...connection = %@\n\n", theConnection);
     NSLog(@"\n\n...size of access token buffer = %i bytes\n\n", (int)accessTokenBuffer.length);
     
@@ -302,7 +306,7 @@
                 scopes = [accessTokenResponseDictionary objectForKey:@"scope"];
                 expires = [accessTokenResponseDictionary objectForKey:@"expires_in"];
                 
-#if DEBUG
+#if LOG_MESSAGES_ON
                 NSLog(@"\n\n... access token response: %@\n\n", accessTokenResponseDictionary);
                 
                 NSLog(@"\n\n...access token = %@\n\n", accessToken);
@@ -335,7 +339,7 @@
                 
             }
             else{
-#if DEBUG
+#if LOG_MESSAGES_ON
                 NSLog(@"\n\n...ERROR ---> Access token response is EMPTY.\n\n");
 #endif
             }
@@ -347,7 +351,7 @@
     }
     else{
         
-#if DEBUG
+#if LOG_MESSAGES_ON
         NSLog(@"\n\nERROR ---> no Json response received. Exiting.\n\n");
 #endif
         
@@ -357,7 +361,7 @@
 
 - (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error{
  
-#if DEBUG
+#if LOG_MESSAGES_ON
     NSLog(@"\n\n---> Entering connectionDidFailWithError method...connection = %@\n\n", theConnection);
 #endif
     

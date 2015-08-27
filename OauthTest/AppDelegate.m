@@ -50,7 +50,7 @@
     
     // if not successfull, authorizationToken will not be updated and method will return NO
     
-#if DEBUG
+#if LOG_MESSAGES_ON
     NSLog(@"\n\n...OauthTest AppDelegate...inside applicationOpenUrlSourceApplicationAnnotation!!\n\n");
     NSLog(@"Calling Application Bundle ID: %@", sourceApplication);
     NSLog(@"URL scheme:%@", [url scheme]);
@@ -69,7 +69,7 @@
         
         // valid callback has occurred - now get authorization token
         
-#if DEBUG
+#if LOG_MESSAGES_ON
         NSLog(@"\n\n...VALID URL scheme detected - loading Authorization token into global variable\n\n");
 #endif
         [tempString setString:[url query]];
@@ -85,7 +85,7 @@
         }
         else{
             
-#if DEBUG
+#if LOG_MESSAGES_ON
             NSLog(@"\n\n...ERROR ---> Cannot find 'code=' in returned URL callback...returning NO and NOT updating authorizationToken\n\n");
 #endif
             return NO;
@@ -103,7 +103,7 @@
         }
         else{
             
-#if DEBUG
+#if LOG_MESSAGES_ON
             NSLog(@"\n\n...ERROR ---> Cannot find '&state=%@' in returned URL callback..returning NO and NOT updating authorizationToken\n\n", STATE);
 #endif
             return NO;
@@ -111,7 +111,7 @@
         
         authorizationToken = (NSString*)tempString;
         
-#if DEBUG
+#if LOG_MESSAGES_ON
         NSLog(@"...\n\n...SUCCESS!...appDelegate...authorization token received = %@...updating authorizationToken and returning YES\n\n", authorizationToken);
 #endif
         
@@ -121,7 +121,7 @@
 
     else{
         
-#if DEBUG
+#if LOG_MESSAGES_ON
         NSLog(@"...\n\n...ERROR ---> appDelegate...URL scheme returned = %@...not equal to URL scheme sent = %@...exiting - doing nothing.\n\n", [url scheme], [NSString stringWithFormat:@"%@", CUSTOM_URL_SCHEME]);
 #endif
         
