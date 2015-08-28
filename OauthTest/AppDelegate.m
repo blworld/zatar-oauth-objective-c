@@ -51,10 +51,10 @@
     // if not successfull, authorizationToken will not be updated and method will return NO
     
 #if LOG_MESSAGES_ON
-    NSLog(@"\n\n...OauthTest AppDelegate...inside applicationOpenUrlSourceApplicationAnnotation!!\n\n");
-    NSLog(@"Calling Application Bundle ID: %@", sourceApplication);
+    NSLog(@"\n\n---> OauthTest AppDelegate...inside applicationOpenUrlSourceApplicationAnnotation...\n\n");
+    NSLog(@"\n\nCalling Application Bundle ID: %@", sourceApplication);
     NSLog(@"URL scheme:%@", [url scheme]);
-    NSLog(@"URL query: %@", [url query]);
+    NSLog(@"URL query: %@\n\n", [url query]);
 #endif
     
     NSMutableString *tempString = [[NSMutableString alloc]initWithCapacity:128];

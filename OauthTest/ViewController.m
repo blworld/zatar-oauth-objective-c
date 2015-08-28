@@ -178,6 +178,7 @@
     NSString *requestPayload = [NSString stringWithFormat:@"grant_type=authorization_code&code=%@&redirect_uri=%@%%3A%%2F%%2FAuthorize%%2Ecom",authorizationToken, CUSTOM_URL_SCHEME];
     
     [eventLogTextString appendString:[NSString stringWithFormat:@"\n\n...Request Payload:\n%@", requestPayload]];
+    
     eventLogTextView.text = eventLogTextString;
     
 #if LOG_MESSAGES_ON
@@ -293,11 +294,26 @@
     
     if ([currentContentType isEqualToString:@"application/json"]) {
         
+        NSString *finalString = @"";
+        
         if (theConnection == AccessTokenConnection) {
 
             // deserialize json response into Dictionary
             
             accessTokenResponseDictionary = [NSJSONSerialization JSONObjectWithData:accessTokenBuffer options:kNilOptions error:nil];
+            
+            if ([accessTokenResponseDictionary objectForKey:@"error"] || [accessTokenResponseDictionary objectForKey:@"violations"]) {
+                
+                // an error occurred - display it and exit
+                
+                [eventLogTextString appendString:[NSString stringWithFormat:@"\n\nERROR: Response from server:\n\n%@\n\n", [accessTokenResponseDictionary description]]];
+                
+                finalString = [NSString stringWithFormat:@"\n---> OauthTestApp exiting - Authorization Attempt Failed.\n"];
+                
+                [eventLogTextString appendString:finalString];
+                
+            }
+            else{
 
             if (accessTokenResponseDictionary.count != 0) {
                 
@@ -316,32 +332,60 @@
                 NSLog(@"\n\n...scopes: %@\n\n", [accessTokenResponseDictionary objectForKey:@"scope"]);
 #endif
                 
-                // print out in text box
-                
-                if (accessToken != NULL && refreshToken != NULL) {
-                    [eventLogTextString appendString: [NSString stringWithFormat:@"\n\n--> Application Successfully Authorized\n"]];
-                    [eventLogTextString appendString: [NSString stringWithFormat:@"\nNew Access Token:\n%@\n", accessToken]];
-                    [eventLogTextString appendString: [NSString stringWithFormat:@"\nNew Refresh Token:\n%@\n", refreshToken]];
-                }
-                else{
-                    [eventLogTextString appendString: [NSString stringWithFormat:@"\n\n--> ERROR NULL Tokens Received\n"]];
-                }
+                [eventLogTextString appendString: [NSString stringWithFormat:@"\n\nNew Access Token:\n%@\n", accessToken]];
+                [eventLogTextString appendString: [NSString stringWithFormat:@"\nNew Refresh Token:\n%@\n", refreshToken]];
 
                 
-                eventLogTextView.text = eventLogTextString;
+                // print out in text box
                 
-                NSRange subRange = [eventLogTextView.text rangeOfString:refreshToken];
                 
-                if (subRange.location != NSNotFound) {
-                    [eventLogTextView scrollRangeToVisible:subRange];
+                if (![self thisValueIsNull:accessToken] && ![self thisValueIsNull:refreshToken]) {
+                    
+                    // if all tokens are NOT NULL, then print out success message
+                    
+                    finalString = [NSString stringWithFormat:@"\n\n--> Application Successfully Authorized\n"];
+                    
+                    [eventLogTextString appendString: finalString];
+                    
+#if LOG_MESSAGES_ON
+                    NSLog(@"\n\n...Application Successfully Authorized\n\n");
+#endif
+                    
+                }
+                else{
+                    
+                    // else print out error message
+                    
+                    finalString = [NSString stringWithFormat:@"\n\n--> ERROR - NULL Token(s) Received\n"];
+                    
+                    [eventLogTextString appendString: finalString];
+                    
+#if LOG_MESSAGES_ON
+                    NSLog(@"\n\n...ERROR ---> NULL Token(s) receieved.\n\n");
+#endif
                 }
                 
-                
+
+
             }
             else{
 #if LOG_MESSAGES_ON
                 NSLog(@"\n\n...ERROR ---> Access token response is EMPTY.\n\n");
 #endif
+            }
+                
+                
+            
+            }
+            
+            // update eventlogtextstring and scroll to the bottom
+            
+            eventLogTextView.text = eventLogTextString;
+            
+            NSRange subRange = [eventLogTextView.text rangeOfString:finalString];
+            
+            if (subRange.location != NSNotFound) {
+                [eventLogTextView scrollRangeToVisible:subRange];
             }
         
         
@@ -365,6 +409,14 @@
     NSLog(@"\n\n---> Entering connectionDidFailWithError method...connection = %@\n\n", theConnection);
 #endif
     
+}
+
+-(BOOL)thisValueIsNull:(NSString*)inputString{
+    
+    if (inputString == NULL || [inputString isEqual:[NSNull null]] || [inputString isEqual:nil]) {
+        return YES;
+    }
+    else return NO;
 }
 
 
