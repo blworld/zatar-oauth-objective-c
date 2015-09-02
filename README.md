@@ -42,4 +42,21 @@ In order to receive redirects, your AppDelegate needs to support the method -(BO
 ## Get Notified when App is invoked through Redirection
 Another thing this app does is register to be notified when the app becomes active (-(void)justBecameActive method) so it knows when the redirection has taken place.
 
+# Details on Oauth 2.0 Authorization Code Grant Flow implementation in iOS
+**Here are the steps this sample app uses to perform the Authorization Code Grant Flow in iOS (pseudo code):**
+
+1. Application opens up browser pointed at the Authorization Server with parameters in URI
+  * URL: ```<rootURI>/authorize?response_type=code&client_id=<clientId>&state=<state>&redirect_uri=<custom_url_scheme>://Authorize.com&scope=read,update,create```
+2. Browser opens and Authorization Server asks user for credentials, then asks user to authorize app to access their resources. 
+3. If user grants permission, then Authorization Server uses Redirect URI from #1 above to “call back” to the app with an Authorization Code embedded as a parameter of the URI (“code=“ parameter).
+4. If iOS app has registered the custom URL scheme properly, then when Safari asks for the Redirect URI, the OS will send the request back to the sample app. This causes the ```application:openUrl:sourceApplication:annotation``` method of the app’s AppDelegate to be called.
+5. App then uses this Authorization Code to do an HTTP POST command to obtain Access and Refresh Tokens:
+  * URL: ```<rootURI>/token```
+  * POST “Authorization” header must contain base64 encoded concatenation of ```<clientId>:<secret>```
+  * POST Payload must contain: ```grant_type=authorization_code&code=<authorization_code>&redirect_uri=<custom_url_scheme>://Authorize.com```
+6. Authorization server then responds with Access and Refresh Tokens in response payload.
+7. NOTE this process only needs to be done once to gain authorization. After that, the app uses the Access Token for all requests. When the Access Token expires, it uses the Refresh Token to obtain a new set of Access and Refresh Tokens. If the user revokes access, then the app will need to re-run this process from the beginning.
+
+
+
 Refer to the code for more detail.
