@@ -9,9 +9,9 @@
 #ifndef OauthTest_globalSettings_h
 #define OauthTest_globalSettings_h
 
-#define CLIENT_ID @"enterYourClientIdHere"                       // unencoded clientID goes here
+#define CLIENT_ID @"enterYourClientIdHere"                  // unencoded clientID goes here
 
-#define SECRET  @"enterYourSecretHere"                         // unencoded secret goes here
+#define SECRET  @"enterYourSecretHere"                      // unencoded secret goes here
 
 #define ROOT_URI @"https://beta-api.zatar.com/v2"           // rootURI goes here
 

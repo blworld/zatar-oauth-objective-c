@@ -72,6 +72,10 @@
     NSLog(@"\n\nzviewController.m...tappedOnAuthorizeButton...targetString = %@\n\n", targetString);
 #endif
     
+    [eventLogTextString appendString:[NSString stringWithFormat:@"\nInvoking Browswer with URL set to:\n\n%@\n", targetString]];
+    
+    eventLogTextView.text = eventLogTextString;     // update event log on device
+    
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:targetString]];
      
     
@@ -119,7 +123,7 @@
         eventLogTextView.text = eventLogTextString;
         
         if (!infoAlert) {
-            infoAlert =[[UIAlertView alloc]initWithTitle:@"Alert" message:@"No Valid Authorization Code Detected\nPlease Tap Authorize Button\nYour browswer will then open and you will be taken to the host website to log in and provide authorization for this app to access your resources\nThen you will be returned to this app to view your Access and Refresh Tokens" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            infoAlert =[[UIAlertView alloc]initWithTitle:@"Alert" message:@"No Valid Authorization Code Detected\nPlease Tap Authorize Button\nYour browser will then open and you will be taken to the host website to log in and provide authorization for this app to access your resources\nThen you will be returned to this app to view your Access and Refresh Tokens" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         }
         
         [infoAlert show];
@@ -164,7 +168,7 @@
     NSString *base64EncodedClientIDSecret = [binaryUTF8encodedClientIDSecret base64EncodedStringWithOptions:0];
     
 #if LOG_MESSAGES_ON
-    NSLog(@"\n\n...base 64 encoded clientID:secret = %@\n\n", base64EncodedClientIDSecret);
+    NSLog(@"\n\n...base 64 encoded clientID:secret for Auhorization Header = %@\n\n", base64EncodedClientIDSecret);
 #endif
     
     [AccessTokenRequest setValue:[NSString stringWithFormat:@"Basic %@", base64EncodedClientIDSecret] forHTTPHeaderField:@"Authorization"];
